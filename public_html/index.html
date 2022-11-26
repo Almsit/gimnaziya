@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title> Пользовательская страница</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    </head>
+    <body>
+
+
+        <form id="form_email" class="row g-3 needs-validation" novalidate>
+
+            <!-- Модальное окно -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group col-md-12">
+                                <label for="email" class="mr-2 col-form-label-sm">Введите email</label>
+                                <div class="email_inp_wrap"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Закрыть</button>
+
+                            <div class="modal-footer_btn">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <br><br>
+        <div class="container">
+            <button id="email_table_add" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onClick="popup_f('email_new', false, false)">Добавить почту</button>
+            <br><br>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="td_1">
+                            № п/п
+                        </th>
+                        <th class="td_2">
+                            Email
+                        </th>
+                        <th class="td_3">
+                            Изменить
+                        </th>
+                        <th class="td_4">
+                            Удалить
+                        </th>
+                    </tr>
+                </tbody>
+                <tbody class="table_email">
+                </tbody>
+            </table>
+            <div id="msg_wrap">
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="form-group col-md-12">
+                        <label for="theme" class="mr-2 col-form-label-sm">Введите email</label>
+                        <input type="text" aria-describedby="emailHelp" class="form-control form-control-sm form-control-n" autocomplete="off" name="theme" id="theme" placeholder="Введите тему" required="" />
+                        <div class="invalid-feedback">
+                            Введите тему письма
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-md-12">
+                        <label for="theme" class="mr-2 col-form-label-sm">Введите email</label>
+                        <textarea cols="20" rows="4" id="msg" class="form-control" id="msg"  placeholder="Тело письма" required="" aria-describedby="emailHelp" class="form-control form-control-sm form-control-n"></textarea>
+                        <div class="invalid-feedback">
+                            Введите тело письма
+                        </div>
+                    </div>
+                    <button type="submit" id="send_msg" class="btn btn-primary">Начать рассылку</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="/assets/js/main.js"></script>
+    </body>
+</html>

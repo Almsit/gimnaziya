@@ -1,0 +1,15 @@
+.table .td_1{
+    width:10%;
+}
+.table .td_2{
+    width:70%;
+}
+.table .td_3{
+    width:10%;
+}
+.table .td_4{
+    width:10%;
+}
+#email_table_add{
+    float:right;
+}
