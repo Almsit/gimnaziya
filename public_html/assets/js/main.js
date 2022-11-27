@@ -11,7 +11,7 @@ function get_email(){
                     "<input type='hidden' value='"+JSON.parse(data)[i].id+"' id='email_inp_id_"+JSON.parse(data)[i].id+"'/>" +
                     "</td>" +
                     "<td><span class='text_email' id='text_email_"+JSON.parse(data)[i].id+"'>"+JSON.parse(data)[i].email+"</span></td>" +
-                    "<td><span data-toggle='modal' data-target='#exampleModal' onClick='popup_f(\"email_edit\", $(\"#email_inp_"+JSON.parse(data)[i].id+"\").val(), $(\"#email_inp_id_"+JSON.parse(data)[i].id+"\").val())'>Изменить</span></td><td><span onClick='popup_f(\"email_del\", false, "+JSON.parse(data)[i].id+")'>Удалить</span></td></tr>");
+                    "<td><span class='btn_p' data-toggle='modal' data-target='#exampleModal' onClick='popup_f(\"email_edit\", $(\"#email_inp_"+JSON.parse(data)[i].id+"\").val(), $(\"#email_inp_id_"+JSON.parse(data)[i].id+"\").val())'>Изменить</span></td><td><span class='btn_p' onClick='popup_f(\"email_del\", false, "+JSON.parse(data)[i].id+")'>Удалить</span></td></tr>");
             }
         }
     })
@@ -47,8 +47,9 @@ function popup_f(id, email, email_id){
 
         $(".modal-footer_btn").html("<button type='submit' id='email_edit_form' class='btn btn-primary'>Редактировать</button>");
     } else if(id == "email_del"){
-
-        email_del_f(email_id);
+        if(confirm('Вы точно хотите удалить?')){
+            email_del_f(email_id);
+        }
     }
 }
 
@@ -67,7 +68,7 @@ function email_add_f(){
                 "<input type='hidden' value='"+JSON.parse(data)[0].id+"' id='email_inp_id_"+JSON.parse(data)[0].id+"'/>" +
                 "</td>" +
                 "<td><span class='text_email' id='text_email_"+JSON.parse(data)[0].id+"'>"+JSON.parse(data)[0].email+"</span></td>" +
-                "<td><span data-toggle='modal' data-target='#exampleModal' onClick='popup_f(\"email_edit\", $(\"#email_inp_"+JSON.parse(data)[0].id+"\").val(), $(\"#email_inp_id_"+JSON.parse(data)[0].id+"\").val())'>Изменить</span></td><td><span onClick='popup_f(\"email_del\", false, "+JSON.parse(data)[0].id+")'>Удалить</span></td></tr>");
+                "<td><span class='btn_p' data-toggle='modal' data-target='#exampleModal' onClick='popup_f(\"email_edit\", $(\"#email_inp_"+JSON.parse(data)[0].id+"\").val(), $(\"#email_inp_id_"+JSON.parse(data)[0].id+"\").val())'>Изменить</span></td><td><span class='btn_p' onClick='popup_f(\"email_del\", false, "+JSON.parse(data)[0].id+")'>Удалить</span></td></tr>");
         }
     })
 }
@@ -104,12 +105,17 @@ function email_del_f(id) {
 var t = 0;
 var theme = "";
 var msg = "";
+var temp_send_wrap = $("#msg_wrap").html();
 function send_post(){
     if($(".text_email")[t] != undefined) {
         if(t == 0){
+            $("#email_table_add").hide();
+            $(".btn_p").hide();
             theme = $("#theme").val();
             msg = $("#msg").val();
-            $("#msg_wrap").html("Идет отправка писем");
+            $("#msg_wrap").html("<div class='msg_status'></div>");
+            $(".msg_status").html("Идет отправка писем<span class='t2'></span>");
+            cl = setInterval(t2, 500);
         }
         $.ajax({
             url: "/include/msg.php",
@@ -125,16 +131,70 @@ function send_post(){
         })
     } else {
         if(t>0){
-            $("#msg_wrap").html("Все письма отправлены");
+            $(".msg_status").html("Все письма отправлены");
+            $(".msg_status").append("<br><br><button onClick='clear_msg()'>Очистить</button>");
+            $("#email_table_add").show();
+            $(".btn_p").show();
+            t = 0;
         } else {
-            $("#msg_wrap").html("Email отсутствуют");
+            $(".msg_status").html("Email отсутствуют");
+            $(".msg_status").append("<br><br><button onClick='clear_msg()'>Очистить</button>");
+            $("#email_table_add").show();
+            $(".btn_p").show();
+            t = 0;
         }
     }
+
 
 }
 
 
+function clear_msg(){
+    $("#msg_wrap").html("");
+    $("#msg_wrap").html(temp_send_wrap);
+
+    $(".text_email").each(function(){
+        $(this).parent().parent().css("background-color", "#fff");
+    })
+
+    var forms = document.querySelectorAll('.needs-validation_msg')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                console.log(event.submitter.attributes[1].nodeValue );
+                console.log(!form.checkValidity());
+                if (!form.checkValidity()) {
+                    event.stopPropagation()
+                } else {
+                    if(event.submitter.attributes[1].nodeValue == "send_msg"){
+                        send_post();
+                    }
+                }
+                event.preventDefault()
+                form.classList.add('was-validated')
+                event.preventDefault()
+            }, false)
+        })
+
+}
+function t2(){
+    if($(".t2").html() != undefined){
+        if($(".t2").html() == "."){
+            $(".t2").html("..");
+        } else if($(".t2").html() == ".."){
+            $(".t2").html("...");
+        } else {
+            $(".t2").html(".");
+        }
+    } else {
+        clearInterval(cl);
+    }
+}
+
+var cl = "";
+
 get_email();
+
 
 (function () {
     'use strict'

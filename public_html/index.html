@@ -75,7 +75,7 @@
                 </tbody>
             </table>
             <div id="msg_wrap">
-                <form class="row g-3 needs-validation" novalidate>
+                <form class="row g-3 needs-validation needs-validation_msg" novalidate>
                     <div class="form-group col-md-12">
                         <label for="theme" class="mr-2 col-form-label-sm">Введите email</label>
                         <input type="text" aria-describedby="emailHelp" class="form-control form-control-sm form-control-n" autocomplete="off" name="theme" id="theme" placeholder="Введите тему" required="" />
@@ -86,10 +86,10 @@
 
 
                     <div class="form-group col-md-12">
-                        <label for="theme" class="mr-2 col-form-label-sm">Введите email</label>
+                        <label for="theme" class="mr-2 col-form-label-sm">Введите сообщение</label>
                         <textarea cols="20" rows="4" id="msg" class="form-control" id="msg"  placeholder="Тело письма" required="" aria-describedby="emailHelp" class="form-control form-control-sm form-control-n"></textarea>
                         <div class="invalid-feedback">
-                            Введите тело письма
+                            Введите сообщение
                         </div>
                     </div>
                     <button type="submit" id="send_msg" class="btn btn-primary">Начать рассылку</button>

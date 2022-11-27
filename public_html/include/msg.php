@@ -37,11 +37,11 @@
 
         // Настройки вашей почты
         $mail->Host       = 'smtp.yandex.ru'; // SMTP сервера вашей почты
-        $mail->Username   = ''; // Логин на почте
-        $mail->Password   = ''; // Пароль на почте
+        $mail->Username   = 'marketbox-20@marketbox.ru'; // Логин на почте
+        $mail->Password   = '2021Marketbox2021'; // Пароль на почте
         $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
-        $mail->setFrom('', 'Тестовое письмо'); // Адрес самой почты и имя отправителя
+        $mail->setFrom('marketbox-20@marketbox.ru', 'Тестовое письмо'); // Адрес самой почты и имя отправителя
 
         // Получатель письма
         $mail->addAddress($email);
