@@ -154,7 +154,7 @@ function clear_msg(){
     $("#msg_wrap").html(temp_send_wrap);
 
     $(".text_email").each(function(){
-        $(this).parent().parent().css("background-color", "#fff");
+        $(this).parent().parent().removeAttr("style");
     })
 
     var forms = document.querySelectorAll('.needs-validation_msg')
